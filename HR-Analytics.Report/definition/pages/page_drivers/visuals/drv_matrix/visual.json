@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "drv_matrix",
   "position": {
     "x": 856,
@@ -13,25 +13,6 @@
     "visualType": "pivotTable",
     "query": {
       "queryState": {
-        "Columns": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Employees"
-                    }
-                  },
-                  "Property": "OverTime"
-                }
-              },
-              "queryRef": "Employees.OverTime",
-              "nativeQueryRef": "OverTime",
-              "active": true
-            }
-          ]
-        },
         "Rows": {
           "projections": [
             {
@@ -46,8 +27,25 @@
                 }
               },
               "queryRef": "Employees.Job Level",
-              "nativeQueryRef": "Job Level",
-              "active": true
+              "nativeQueryRef": "Job Level"
+            }
+          ]
+        },
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employees"
+                    }
+                  },
+                  "Property": "OverTime"
+                }
+              },
+              "queryRef": "Employees.OverTime",
+              "nativeQueryRef": "OverTime"
             }
           ]
         },

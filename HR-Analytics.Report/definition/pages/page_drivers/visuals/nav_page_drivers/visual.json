@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "nav_page_drivers",
   "position": {
     "x": 936,
@@ -51,7 +51,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1F3B73'"
+                      "Value": "'#172026'"
                     }
                   }
                 }
@@ -144,6 +144,13 @@
               "expr": {
                 "Literal": {
                   "Value": "1.0D"
+                }
+              }
+            },
+            "roundEdge": {
+              "expr": {
+                "Literal": {
+                  "Value": "8.0D"
                 }
               }
             }

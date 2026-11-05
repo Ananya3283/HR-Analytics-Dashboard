@@ -1,18 +1,18 @@
 {
   "name": "HR Navy",
   "dataColors": [
-    "#2E4A8F",
-    "#E8772E",
-    "#5B8DEF",
-    "#2E9E6A",
-    "#9AA5B1",
-    "#C23B5A",
+    "#3D63C9",
+    "#B26B00",
+    "#C8325B",
+    "#00829B",
+    "#9AA8B3",
+    "#46535D",
     "#7A5CC2",
     "#D9A21B"
   ],
   "background": "#FFFFFF",
-  "foreground": "#1B2433",
-  "tableAccent": "#1F3B73",
+  "foreground": "#172026",
+  "tableAccent": "#172026",
   "good": "#2E9E6A",
   "neutral": "#D9A21B",
   "bad": "#C23B5A",
@@ -20,17 +20,17 @@
     "title": {
       "fontFace": "Segoe UI Semibold",
       "fontSize": 11,
-      "color": "#1B2433"
+      "color": "#172026"
     },
     "label": {
       "fontFace": "Segoe UI",
       "fontSize": 9,
-      "color": "#5B6576"
+      "color": "#5D6B75"
     },
     "callout": {
       "fontFace": "Segoe UI Semibold",
       "fontSize": 22,
-      "color": "#1B2433"
+      "color": "#172026"
     }
   },
   "visualStyles": {
@@ -52,7 +52,7 @@
             "show": true,
             "color": {
               "solid": {
-                "color": "#DCE1EA"
+                "color": "#DCDED8"
               }
             },
             "radius": 8
@@ -77,7 +77,7 @@
             "fontSize": 11,
             "fontColor": {
               "solid": {
-                "color": "#1B2433"
+                "color": "#172026"
               }
             }
           }
@@ -90,7 +90,7 @@
           {
             "color": {
               "solid": {
-                "color": "#EEF1F7"
+                "color": "#F7F7F4"
               }
             },
             "transparency": 0

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "comp_scatter",
   "position": {
     "x": 16,
@@ -32,24 +32,6 @@
             }
           ]
         },
-        "Size": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Employees"
-                }
-              },
-              "queryRef": "_Measures.Employees",
-              "nativeQueryRef": "Employees"
-            }
-          ]
-        },
         "X": {
           "projections": [
             {
@@ -64,8 +46,7 @@
                 }
               },
               "queryRef": "_Measures.Avg Monthly Income",
-              "nativeQueryRef": "Avg Monthly Income",
-              "active": true
+              "nativeQueryRef": "Avg Monthly Income"
             }
           ]
         },
@@ -84,6 +65,24 @@
               },
               "queryRef": "_Measures.Attrition Rate",
               "nativeQueryRef": "Attrition Rate"
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Employees"
+                }
+              },
+              "queryRef": "_Measures.Employees",
+              "nativeQueryRef": "Employees"
             }
           ]
         }
@@ -118,7 +117,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2E4A8F'"
+                      "Value": "'#C8325B'"
                     }
                   }
                 }

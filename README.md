@@ -8,7 +8,9 @@ A 3-page Power BI report that answers three questions an HR head would ask:
 
 Built on the IBM HR Analytics Employee Attrition dataset (1,470 employees, 35 attributes).
 
-![Overview page](docs/overview.png)
+**[Open the live dashboard](https://ananya3283.github.io/HR-Analytics-Dashboard/)** (no install needed), or open the Power BI file below.
+
+![Web dashboard: every dot is one employee](docs/web.png)
 
 ## Key findings
 
@@ -34,8 +36,25 @@ Built on the IBM HR Analytics Employee Attrition dataset (1,470 employees, 35 at
 
 All pages share synced slicers (department, gender, job level, age band) and button navigation.
 
+![Power BI overview page](docs/overview.png)
+
 | ![Attrition drivers](docs/drivers.png) | ![Compensation and what-if](docs/compensation.png) |
 |---|---|
+
+## Web version
+
+The same analysis as a website, so anyone can explore it from a link: [ananya3283.github.io/HR-Analytics-Dashboard](https://ananya3283.github.io/HR-Analytics-Dashboard/).
+
+- **Each employee is a dot.** The 1,470 dots light up as you filter, so you see the people behind the percentages. Hover a dot to see who it is.
+- **Same numbers as Power BI.** It reads the same `data/HR.csv`, and [web/src/data/hr.ts](web/src/data/hr.ts) re-implements every DAX measure one to one.
+- **Shareable views.** Filters, the active page and the what-if sliders are stored in the URL, so a filtered view can be shared as a link.
+- **Accessible by design.** The colours were checked for colour-blind safety and contrast, the font is Atkinson Hyperlegible, and the motion respects the reduced-motion setting.
+
+Stack: React, TypeScript, Vite, Tailwind CSS, shadcn/ui, Recharts, Motion. It deploys to GitHub Pages through [GitHub Actions](.github/workflows/pages.yml) on every push.
+
+![Web what-if view](docs/web-whatif.png)
+
+Run it locally: `cd web && npm install && npm run dev`.
 
 ## How it is built
 
@@ -79,6 +98,7 @@ sql/hr_analysis.sql             SQL analysis (16 queries)
 HR-Analytics.pbip               Power BI project (open this)
 HR-Analytics.SemanticModel/     model: Power Query, tables, DAX measures (TMDL, readable in any editor)
 HR-Analytics.Report/            report pages and visuals (PBIR JSON)
+web/                            web version (React + TypeScript), deployed to GitHub Pages
 docs/                           screenshots
 ```
 

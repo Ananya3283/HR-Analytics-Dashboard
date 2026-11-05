@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "attr_tenure",
   "position": {
     "x": 428,
@@ -93,7 +93,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B2433'"
+                      "Value": "'#172026'"
                     }
                   }
                 }
@@ -139,6 +139,17 @@
                 }
               }
             },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5D6B75'"
+                    }
+                  }
+                }
+              }
+            },
             "showAxisTitle": {
               "expr": {
                 "Literal": {
@@ -157,7 +168,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2E4A8F'"
+                      "Value": "'#C8325B'"
                     }
                   }
                 }

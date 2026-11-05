@@ -1,26 +1,26 @@
 table 'Metric Selector'
-	lineageTag: 93ccd421-62ca-4ce3-baa4-7f2e2298791a
 
 	column Metric
-		lineageTag: 3219c356-f2b3-48af-96f0-84a2b5593355
-		summarizeBy: none
+		dataType: string
+		isDataTypeInferred
 		isNameInferred
+		summarizeBy: none
 		sourceColumn: [Metric]
 		sortByColumn: 'Metric Order'
 
 	column 'Metric Order'
-		isHidden
+		dataType: int64
 		formatString: 0
-		lineageTag: fbea4887-760d-418a-a1ff-208953126f99
-		summarizeBy: none
+		isHidden
+		isDataTypeInferred
 		isNameInferred
+		summarizeBy: none
 		sourceColumn: [Metric Order]
 
 	partition 'Metric Selector' = calculated
 		mode: import
 		source =
-				DATATABLE (
-				    "Metric", STRING, "Metric Order", INTEGER,
-				    { { "Attrition Rate", 1 }, { "Leavers", 2 }, { "Headcount", 3 } }
-				)
-
+			DATATABLE (
+			    "Metric", STRING, "Metric Order", INTEGER,
+			    { { "Attrition Rate", 1 }, { "Leavers", 2 }, { "Headcount", 3 } }
+			)

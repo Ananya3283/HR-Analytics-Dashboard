@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "slicer_2",
   "position": {
     "x": 516,
@@ -27,8 +27,7 @@
                 }
               },
               "queryRef": "Employees.Job Level",
-              "nativeQueryRef": "Job Level",
-              "active": true
+              "nativeQueryRef": "Job Level"
             }
           ]
         }
@@ -70,7 +69,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B2433'"
+                      "Value": "'#172026'"
                     }
                   }
                 }

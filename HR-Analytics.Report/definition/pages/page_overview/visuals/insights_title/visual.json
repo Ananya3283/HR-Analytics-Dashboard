@@ -23,14 +23,14 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "11pt",
-                      "color": "#1B2433"
+                      "color": "#172026"
                     }
                   },
                   {
                     "value": "  (update with filters)",
                     "textStyle": {
                       "fontSize": "9pt",
-                      "color": "#5B6576"
+                      "color": "#5D6B75"
                     }
                   }
                 ]

@@ -1,0 +1,90 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/atkinson-hyperlegible-next";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Atkinson Hyperlegible Next Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  /* data colours (validated with the dataviz palette checker) */
+  --color-leaver: var(--left); /* not "left": text-left is text-align */
+  --color-kept: var(--kept);
+  --color-stayed: var(--stayed);
+  --color-female: var(--female);
+  --color-male: var(--male);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  --background: #f7f7f4;
+  --foreground: #172026;
+  --card: #ffffff;
+  --card-foreground: #172026;
+  --popover: #ffffff;
+  --popover-foreground: #172026;
+  --primary: #172026;
+  --primary-foreground: #f7f7f4;
+  --secondary: #ecede8;
+  --secondary-foreground: #172026;
+  --muted: #ecede8;
+  --muted-foreground: #5d6b75;
+  --accent: #ecede8;
+  --accent-foreground: #172026;
+  --destructive: #c8325b;
+  --border: #dcded8;
+  --input: #cfd3cc;
+  --ring: #00829b;
+  --radius: 0.5rem;
+
+  --left: #c8325b;    /* people who left */
+  --kept: #00829b;    /* what-if, money kept */
+  --stayed: #9aa8b3;  /* context: people who stayed */
+  --female: #3d63c9;
+  --male: #b26b00;
+  /* sequential ramp for attrition-rate cells, light -> dark */
+  --heat-1: #e39aae;
+  --heat-2: #d56b88;
+  --heat-3: #c44166;
+  --heat-4: #a12347;
+  --heat-5: #6e1431;
+
+  /* motion tokens (web-ui hub, transitions.dev scale) */
+  --duration-quick: 150ms;
+  --duration-fast: 250ms;
+  --duration-slow: 400ms;
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { @apply font-sans; font-feature-settings: "tnum" 1; }
+  body { @apply bg-background text-foreground antialiased; }
+  ::selection { background: color-mix(in oklab, var(--kept) 25%, transparent); }
+}

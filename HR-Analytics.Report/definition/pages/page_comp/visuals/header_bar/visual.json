@@ -30,7 +30,7 @@
                     "value": "   Pay, pay equity and the cost of attrition",
                     "textStyle": {
                       "fontSize": "12pt",
-                      "color": "#C9D3EA"
+                      "color": "#AEB8BF"
                     }
                   }
                 ]
@@ -56,7 +56,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1F3B73'"
+                      "Value": "'#172026'"
                     }
                   }
                 }
