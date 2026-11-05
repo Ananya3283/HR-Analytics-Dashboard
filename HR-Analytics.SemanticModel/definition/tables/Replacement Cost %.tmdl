@@ -1,0 +1,14 @@
+table 'Replacement Cost %'
+	lineageTag: b01cc13b-fb8d-4e62-acdc-6ebf0ab09daf
+
+	column 'Replacement Cost %'
+		formatString: 0%
+		lineageTag: b72e1908-6d61-4175-967c-11008f9ff03c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Replacement Cost %]
+
+	partition 'Replacement Cost %' = calculated
+		mode: import
+		source = DATATABLE ( "Replacement Cost %", DOUBLE, { { 0.25 }, { 0.50 }, { 0.75 }, { 1.00 }, { 1.50 } } )
+

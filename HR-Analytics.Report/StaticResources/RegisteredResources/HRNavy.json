@@ -1,0 +1,102 @@
+{
+  "name": "HR Navy",
+  "dataColors": [
+    "#2E4A8F",
+    "#E8772E",
+    "#5B8DEF",
+    "#2E9E6A",
+    "#9AA5B1",
+    "#C23B5A",
+    "#7A5CC2",
+    "#D9A21B"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#1B2433",
+  "tableAccent": "#1F3B73",
+  "good": "#2E9E6A",
+  "neutral": "#D9A21B",
+  "bad": "#C23B5A",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 11,
+      "color": "#1B2433"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 9,
+      "color": "#5B6576"
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 22,
+      "color": "#1B2433"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#DCE1EA"
+              }
+            },
+            "radius": 8
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ],
+        "padding": [
+          {
+            "top": 6,
+            "bottom": 6,
+            "left": 10,
+            "right": 10
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontSize": 11,
+            "fontColor": {
+              "solid": {
+                "color": "#1B2433"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#EEF1F7"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    }
+  }
+}

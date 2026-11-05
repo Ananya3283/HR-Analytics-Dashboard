@@ -1,0 +1,233 @@
+table _Measures
+	lineageTag: 5c0544e3-7116-49b1-8572-cfe87087f204
+
+	/// Headcount in the current filter context (leavers included).
+	measure Employees = COUNTROWS ( Employees )
+		formatString: #,0
+		displayFolder: 1 KPIs
+		lineageTag: 310efdda-706f-4779-a46a-1070fc45b336
+
+	/// Employees who left.
+	measure Leavers = CALCULATE ( COUNTROWS ( Employees ), Employees[Attrition] = "Yes" )
+		formatString: #,0
+		displayFolder: 1 KPIs
+		lineageTag: f513ade4-8769-447f-8160-2a83daa04e73
+
+	/// Employees still at the company.
+	measure 'Active Employees' = CALCULATE ( COUNTROWS ( Employees ), Employees[Attrition] = "No" )
+		formatString: #,0
+		displayFolder: 1 KPIs
+		lineageTag: c7db7717-c68b-44ff-b779-913381ebe385
+
+	/// Leavers divided by headcount.
+	measure 'Attrition Rate' = DIVIDE ( [Leavers], [Employees] )
+		formatString: 0.0%
+		displayFolder: 1 KPIs
+		lineageTag: b3a465b4-900a-4b27-bb38-90f508dade4c
+
+	measure 'Avg Monthly Income' = AVERAGE ( Employees[MonthlyIncome] )
+		formatString: #,0
+		displayFolder: 1 KPIs
+		lineageTag: fb7fb201-f788-449b-a2b1-9bb6d65a557e
+
+	measure 'Avg Age' = AVERAGE ( Employees[Age] )
+		formatString: 0.0
+		displayFolder: 1 KPIs
+		lineageTag: ef840f32-611c-4eee-bbd2-29ac6741efe9
+
+	measure 'Avg Tenure (Years)' = AVERAGE ( Employees[YearsAtCompany] )
+		formatString: 0.0
+		displayFolder: 1 KPIs
+		lineageTag: 2654d26c-5d1e-47de-9039-526dff28c5a3
+
+	measure 'Attrition Rate (Overtime)' = CALCULATE ( [Attrition Rate], Employees[OverTime] = "Yes" )
+		formatString: 0.0%
+		displayFolder: 2 Drivers
+		lineageTag: c747094f-194b-4af4-a229-55f1c767f005
+
+	measure 'Attrition Rate (No Overtime)' = CALCULATE ( [Attrition Rate], Employees[OverTime] = "No" )
+		formatString: 0.0%
+		displayFolder: 2 Drivers
+		lineageTag: 59be534a-5635-4f20-8d68-c5a2f64dc838
+
+	/// How many times more often overtime staff leave than staff without overtime.
+	measure 'Overtime Risk Multiple' = DIVIDE ( [Attrition Rate (Overtime)], [Attrition Rate (No Overtime)] )
+		formatString: 0.0"x"
+		displayFolder: 2 Drivers
+		lineageTag: 126b01fe-d03f-470f-aec9-6e1da9e3ae4b
+
+	measure 'Attrition Rate (First 2 Years)' = CALCULATE ( [Attrition Rate], Employees[YearsAtCompany] <= 2 )
+		formatString: 0.0%
+		displayFolder: 2 Drivers
+		lineageTag: 19aac3d6-230a-4be3-82be-2c7d3a8d360f
+
+	/// Driven by the Metric Selector slicer on the Attrition Drivers page.
+	measure 'Selected Metric' =
+			SWITCH (
+			    SELECTEDVALUE ( 'Metric Selector'[Metric], "Attrition Rate" ),
+			    "Leavers", [Leavers],
+			    "Headcount", [Employees],
+			    [Attrition Rate]
+			)
+		displayFolder: 2 Drivers
+		lineageTag: 0472cc92-ab17-47ea-b746-edb153fcfa01
+
+		formatStringDefinition =
+				SWITCH (
+				    SELECTEDVALUE ( 'Metric Selector'[Metric], "Attrition Rate" ),
+				    "Attrition Rate", "0.0%",
+				    "#,0"
+				)
+
+	measure 'Monthly Payroll' = SUM ( Employees[MonthlyIncome] )
+		formatString: #,0
+		displayFolder: 3 Compensation
+		lineageTag: ce953903-0272-4a8e-89ad-f15e2d662253
+
+	measure 'Annual Payroll' = [Monthly Payroll] * 12
+		formatString: #,0
+		displayFolder: 3 Compensation
+		lineageTag: 4e51e8d6-1b99-4ed0-8e62-b50073eae39a
+
+	measure 'Avg Income (Male)' = CALCULATE ( [Avg Monthly Income], Employees[Gender] = "Male" )
+		formatString: #,0
+		displayFolder: 3 Compensation
+		lineageTag: c7084d58-58ce-464b-84c0-405ea0ede2f4
+
+	measure 'Avg Income (Female)' = CALCULATE ( [Avg Monthly Income], Employees[Gender] = "Female" )
+		formatString: #,0
+		displayFolder: 3 Compensation
+		lineageTag: fa99a735-a9d0-42fd-8833-6af3ce46c592
+
+	/// Positive = men paid more on average, negative = women paid more.
+	measure 'Gender Pay Gap %' = DIVIDE ( [Avg Income (Male)] - [Avg Income (Female)], [Avg Income (Male)] )
+		formatString: 0.0%
+		displayFolder: 3 Compensation
+		lineageTag: b8db6f48-2dd1-49b2-b3da-ab8005d7e6e5
+
+	/// Raise from the slicer; 10% when nothing or several values are selected.
+	measure 'Raise % Value' = SELECTEDVALUE ( 'Raise %'[Raise %], 0.10 )
+		formatString: 0.0%
+		displayFolder: 4 What-if
+		lineageTag: 355b820f-8c47-4372-ac85-9e1d760a7ed7
+
+	/// Cost to replace a leaver as a share of their annual salary (assumption, default 50%).
+	measure 'Replacement Cost % Value' = SELECTEDVALUE ( 'Replacement Cost %'[Replacement Cost %], 0.50 )
+		formatString: 0%
+		displayFolder: 4 What-if
+		lineageTag: 335f37bc-ac4f-43db-9432-91e576dbbf9f
+
+	/// Annual salary of every leaver times the replacement-cost assumption.
+	measure 'Attrition Cost (Est.)' = CALCULATE ( SUM ( Employees[MonthlyIncome] ), Employees[Attrition] = "Yes" ) * 12 * [Replacement Cost % Value]
+		formatString: #,0
+		displayFolder: 4 What-if
+		lineageTag: 8e8c3a38-d620-4d3e-bdeb-63b2e291792a
+
+	measure 'Cost per Leaver' = DIVIDE ( [Attrition Cost (Est.)], [Leavers] )
+		formatString: #,0
+		displayFolder: 4 What-if
+		lineageTag: 1091b9d2-daef-47de-bd03-41be93f2f237
+
+	/// Yearly cost of giving the selected raise to every current employee in the filter context.
+	measure 'Raise Cost (Annual)' = CALCULATE ( SUM ( Employees[MonthlyIncome] ), Employees[Attrition] = "No" ) * 12 * [Raise % Value]
+		formatString: #,0
+		displayFolder: 4 What-if
+		lineageTag: ee2737d2-f108-4842-8b51-b00c79d4038a
+
+	measure 'Projected Annual Payroll' = [Annual Payroll] + [Raise Cost (Annual)]
+		formatString: #,0
+		displayFolder: 4 What-if
+		lineageTag: 85231253-90a8-4284-b28f-d59f3a475312
+
+	/// Leavers the raise must prevent each year to pay for itself.
+	measure 'Break-even Leavers' = DIVIDE ( [Raise Cost (Annual)], [Cost per Leaver] )
+		formatString: #,0
+		displayFolder: 4 What-if
+		lineageTag: 0dac5ee7-8bf0-4509-88d0-a837938c8ab8
+
+	/// Share of current leavers the raise must keep to pay for itself. Above 100% = it cannot pay back.
+	measure 'Break-even % of Leavers' = DIVIDE ( [Break-even Leavers], [Leavers] )
+		formatString: 0%
+		displayFolder: 4 What-if
+		lineageTag: 79772b7b-c1d9-47d7-a4f5-0fc11d29755b
+
+	/// Job role with the highest attrition rate among roles with 20+ employees.
+	measure 'Insight Top Role' =
+			VAR Roles =
+			    FILTER (
+			        ADDCOLUMNS ( VALUES ( Employees[JobRole] ), "@Rate", [Attrition Rate], "@N", [Employees] ),
+			        [@N] >= 20
+			    )
+			VAR TopRole = TOPN ( 1, Roles, [@Rate], DESC )
+			RETURN
+			    IF (
+			        ISEMPTY ( Roles ),
+			        "Too few employees in this selection to rank roles",
+			        "Riskiest role: " & MAXX ( TopRole, Employees[JobRole] ) & " (" & FORMAT ( MAXX ( TopRole, [@Rate] ), "0.0%" ) & " leave)"
+			    )
+		displayFolder: 5 Insights
+		lineageTag: 19ef71ca-9b61-4881-9b96-83ca674d9106
+
+	measure 'Insight Overtime' =
+			IF (
+			    ISBLANK ( [Overtime Risk Multiple] ),
+			    "No overtime comparison in this selection",
+			    "Overtime staff leave " & FORMAT ( [Overtime Risk Multiple], "0.0" ) & "x as often ("
+			        & FORMAT ( [Attrition Rate (Overtime)], "0%" ) & " vs " & FORMAT ( [Attrition Rate (No Overtime)], "0%" ) & ")"
+			)
+		displayFolder: 5 Insights
+		lineageTag: 5246515a-ad31-4686-a700-49d10c5a6f07
+
+	measure 'Insight New Joiners' =
+			VAR EarlyLeavers = CALCULATE ( [Leavers], Employees[YearsAtCompany] <= 2 )
+			RETURN
+			    IF (
+			        [Leavers] > 0,
+			        FORMAT ( DIVIDE ( EarlyLeavers, [Leavers] ), "0%" ) & " of leavers quit within 2 years ("
+			            & FORMAT ( [Attrition Rate (First 2 Years)], "0%" ) & " early attrition)",
+			        "No leavers in this selection"
+			    )
+		displayFolder: 5 Insights
+		lineageTag: 362b14c4-f81b-4cb3-9aab-3c4d9dbfe94c
+
+	measure 'Insight Pay' =
+			VAR Low = CALCULATE ( [Attrition Rate], Employees[Income Band] = "Under 3K" )
+			VAR High = CALCULATE ( [Attrition Rate], Employees[Income Band] = "10K+" )
+			RETURN
+			    IF (
+			        ISBLANK ( Low ) || ISBLANK ( High ),
+			        "Pay comparison needs both low and high earners in the selection",
+			        "Under-3K earners leave at " & FORMAT ( Low, "0%" ) & " vs " & FORMAT ( High, "0%" ) & " for 10K+"
+			    )
+		displayFolder: 5 Insights
+		lineageTag: 9f05e88f-55f3-489b-8d1d-07331a611524
+
+	/// Plain-English payback of the selected raise.
+	measure 'Insight Raise' =
+			IF (
+			    [Raise % Value] = 0 || [Leavers] = 0,
+			    "Pick a raise above 0% to see its payback",
+			    FORMAT ( [Raise % Value], "0.0%" ) & " raise costs " & FORMAT ( [Raise Cost (Annual)] / 1e6, "0.0" ) & "M/yr: "
+			        & IF (
+			            [Break-even Leavers] > [Leavers],
+			            "it needs " & FORMAT ( [Break-even Leavers], "#,0" ) & " fewer leavers to pay back, but only "
+			                & FORMAT ( [Leavers], "#,0" ) & " left",
+			            "it pays back if it keeps " & FORMAT ( [Break-even Leavers], "#,0" ) & " of "
+			                & FORMAT ( [Leavers], "#,0" ) & " leavers (" & FORMAT ( [Break-even % of Leavers], "0%" ) & ")"
+			        )
+			)
+		displayFolder: 5 Insights
+		lineageTag: bd93b33c-bb21-405f-8ee2-2b7c64585f08
+
+	column Value
+		isHidden
+		formatString: 0
+		lineageTag: 173c5eb3-4858-4d25-8734-5288a5f4d4b5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition _Measures = calculated
+		mode: import
+		source = ROW ( "Value", 0 )
+

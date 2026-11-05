@@ -1,0 +1,14 @@
+table 'Raise %'
+	lineageTag: 48d13597-7222-47fd-8fa2-3464fc77ea33
+
+	column 'Raise %'
+		formatString: 0.0%
+		lineageTag: 5337bb4a-e305-47de-8a35-cf196ef13f44
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Raise %]
+
+	partition 'Raise %' = calculated
+		mode: import
+		source = DATATABLE ( "Raise %", DOUBLE, { { 0 }, { 0.025 }, { 0.05 }, { 0.075 }, { 0.10 }, { 0.125 }, { 0.15 }, { 0.20 } } )
+
