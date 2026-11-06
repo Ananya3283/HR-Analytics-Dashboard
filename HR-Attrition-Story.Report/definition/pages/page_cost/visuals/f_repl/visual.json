@@ -38,6 +38,13 @@
       "data": [
         {
           "properties": {
+            "numericStart": {
+              "expr": {
+                "Literal": {
+                  "Value": "0.5D"
+                }
+              }
+            },
             "mode": {
               "expr": {
                 "Literal": {
@@ -178,7 +185,7 @@
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "t",
+                    "Name": "r",
                     "Entity": "Replacement Cost %",
                     "Type": 0
                   }
@@ -192,7 +199,7 @@
                           "Column": {
                             "Expression": {
                               "SourceRef": {
-                                "Source": "t"
+                                "Source": "r"
                               }
                             },
                             "Property": "Replacement Cost %"

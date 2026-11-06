@@ -38,6 +38,13 @@
       "data": [
         {
           "properties": {
+            "numericStart": {
+              "expr": {
+                "Literal": {
+                  "Value": "0.1D"
+                }
+              }
+            },
             "mode": {
               "expr": {
                 "Literal": {
@@ -178,7 +185,7 @@
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "t",
+                    "Name": "r",
                     "Entity": "Raise %",
                     "Type": 0
                   }
@@ -192,7 +199,7 @@
                           "Column": {
                             "Expression": {
                               "SourceRef": {
-                                "Source": "t"
+                                "Source": "r"
                               }
                             },
                             "Property": "Raise %"
