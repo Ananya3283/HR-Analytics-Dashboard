@@ -1,167 +1,196 @@
 table Employees
+	lineageTag: 8cfd8505-d8f6-4f4f-be16-5cb2f5e84398
 
 	column EmployeeNumber
 		dataType: int64
 		formatString: 0
+		lineageTag: a90eecf2-cc02-402b-b5f9-dcf8aae1c2b0
 		summarizeBy: none
 		sourceColumn: EmployeeNumber
 
 	column Age
 		dataType: int64
 		formatString: 0
+		lineageTag: 3230956d-8869-4747-ba71-bdefe88b52aa
 		summarizeBy: none
 		sourceColumn: Age
 
 	column Attrition
 		dataType: string
+		lineageTag: f01fcd27-d386-4695-8e1e-5884f8822a4f
 		summarizeBy: none
 		sourceColumn: Attrition
 
 	column 'Attrition Flag'
 		dataType: int64
-		formatString: 0
 		isHidden
+		formatString: 0
+		lineageTag: 526cbdd2-c4a2-41c7-a6c8-acdee3fa6326
 		summarizeBy: sum
 		sourceColumn: Attrition Flag
 
 	column BusinessTravel
 		dataType: string
+		lineageTag: 842ba70b-3105-4890-b096-154eaa040019
 		summarizeBy: none
 		sourceColumn: BusinessTravel
 
 	column Department
 		dataType: string
+		lineageTag: 7666d364-27b5-4435-bb69-cb4ef6710c27
 		summarizeBy: none
 		sourceColumn: Department
 
 	column DistanceFromHome
 		dataType: int64
 		formatString: 0
+		lineageTag: c5a20e01-fc44-4763-9c12-12701b2abbe8
 		summarizeBy: none
 		sourceColumn: DistanceFromHome
 
 	column Education
 		dataType: int64
-		formatString: 0
 		isHidden
+		formatString: 0
+		lineageTag: c0d2de2f-a14d-4e07-99de-e073d9d2924c
 		summarizeBy: none
 		sourceColumn: Education
 
 	column 'Education Level'
 		dataType: string
+		lineageTag: 3cacc573-1d4d-4abd-9e47-155c8f14fb56
 		summarizeBy: none
 		sourceColumn: Education Level
 		sortByColumn: Education
 
 	column EducationField
 		dataType: string
+		lineageTag: c93c76ca-761b-4f11-b043-fa76cede1341
 		summarizeBy: none
 		sourceColumn: EducationField
 
 	column EnvironmentSatisfaction
 		dataType: int64
-		formatString: 0
 		isHidden
+		formatString: 0
+		lineageTag: 56029e4c-0937-44ec-bd03-9162f684b79f
 		summarizeBy: none
 		sourceColumn: EnvironmentSatisfaction
 
 	column 'Environment Satisfaction'
 		dataType: string
+		lineageTag: a05ea2b7-0234-4625-8743-77fca072cb01
 		summarizeBy: none
 		sourceColumn: Environment Satisfaction
 		sortByColumn: EnvironmentSatisfaction
 
 	column Gender
 		dataType: string
+		lineageTag: 0208254b-d707-4b39-b403-a29ed90d2f5d
 		summarizeBy: none
 		sourceColumn: Gender
 
 	column JobInvolvement
 		dataType: int64
 		formatString: 0
+		lineageTag: 19d16050-f97f-45f8-9542-1c3cc4edd787
 		summarizeBy: none
 		sourceColumn: JobInvolvement
 
 	column JobLevel
 		dataType: int64
-		formatString: 0
 		isHidden
+		formatString: 0
+		lineageTag: 4fb08f42-47ee-405b-b23d-3556a2de1b61
 		summarizeBy: none
 		sourceColumn: JobLevel
 
 	column 'Job Level'
 		dataType: string
+		lineageTag: 7fa09afd-e5ac-4c92-8e9b-26c3110cc050
 		summarizeBy: none
 		sourceColumn: Job Level
 		sortByColumn: JobLevel
 
 	column JobRole
 		dataType: string
+		lineageTag: c5464652-4da0-43de-8f79-2efe88fc9ea5
 		summarizeBy: none
 		sourceColumn: JobRole
 
 	column JobSatisfaction
 		dataType: int64
-		formatString: 0
 		isHidden
+		formatString: 0
+		lineageTag: f50d5cc2-392e-428f-b984-2e8d18dc2125
 		summarizeBy: none
 		sourceColumn: JobSatisfaction
 
 	column 'Job Satisfaction'
 		dataType: string
+		lineageTag: 2d74401c-0392-4b0e-9e90-39cf776db316
 		summarizeBy: none
 		sourceColumn: Job Satisfaction
 		sortByColumn: JobSatisfaction
 
 	column MaritalStatus
 		dataType: string
+		lineageTag: 72aae7e0-69a1-4604-9062-eb66dce0850f
 		summarizeBy: none
 		sourceColumn: MaritalStatus
 
 	column MonthlyIncome
 		dataType: int64
 		formatString: #,0
+		lineageTag: 794176e5-08bf-4713-8e94-2a11139188e5
 		summarizeBy: sum
 		sourceColumn: MonthlyIncome
 
 	column NumCompaniesWorked
 		dataType: int64
 		formatString: 0
+		lineageTag: d527609b-a63e-41ea-a318-1d2ade87aa46
 		summarizeBy: none
 		sourceColumn: NumCompaniesWorked
 
 	column OverTime
 		dataType: string
+		lineageTag: 8c89756a-f38a-4e93-90c2-e21a9f67bb9e
 		summarizeBy: none
 		sourceColumn: OverTime
 
 	column PercentSalaryHike
 		dataType: int64
 		formatString: 0
+		lineageTag: 6144354a-3b2c-4ae6-a658-d2371b0f8df3
 		summarizeBy: none
 		sourceColumn: PercentSalaryHike
 
 	column PerformanceRating
 		dataType: int64
 		formatString: 0
+		lineageTag: c19286ad-8ba2-4813-abe8-1d15162225d7
 		summarizeBy: none
 		sourceColumn: PerformanceRating
 
 	column RelationshipSatisfaction
 		dataType: int64
 		formatString: 0
+		lineageTag: 00928f77-1daf-4796-bc97-ddcd6faff5ce
 		summarizeBy: none
 		sourceColumn: RelationshipSatisfaction
 
 	column StockOptionLevel
 		dataType: int64
-		formatString: 0
 		isHidden
+		formatString: 0
+		lineageTag: 0d1c44b3-f85f-40fd-8a1a-35c671acfe77
 		summarizeBy: none
 		sourceColumn: StockOptionLevel
 
 	column 'Stock Options'
 		dataType: string
+		lineageTag: 60ec99d1-e6ae-47dd-82e4-8f11ab1abda4
 		summarizeBy: none
 		sourceColumn: Stock Options
 		sortByColumn: StockOptionLevel
@@ -169,24 +198,28 @@ table Employees
 	column TotalWorkingYears
 		dataType: int64
 		formatString: 0
+		lineageTag: 521be4e6-7241-4255-b225-a67e28581dc5
 		summarizeBy: none
 		sourceColumn: TotalWorkingYears
 
 	column TrainingTimesLastYear
 		dataType: int64
 		formatString: 0
+		lineageTag: 1e44d37d-5ad8-4fc1-8e2f-d9fd731b9e5b
 		summarizeBy: none
 		sourceColumn: TrainingTimesLastYear
 
 	column WorkLifeBalance
 		dataType: int64
-		formatString: 0
 		isHidden
+		formatString: 0
+		lineageTag: 0451414c-2649-49cd-80c8-f6ce5652526a
 		summarizeBy: none
 		sourceColumn: WorkLifeBalance
 
 	column 'Work-Life Balance'
 		dataType: string
+		lineageTag: 5be373d1-2256-4728-be55-0131dd6f32a3
 		summarizeBy: none
 		sourceColumn: Work-Life Balance
 		sortByColumn: WorkLifeBalance
@@ -194,92 +227,155 @@ table Employees
 	column YearsAtCompany
 		dataType: int64
 		formatString: 0
+		lineageTag: b547219c-39d7-4345-89a9-c9882e3279ac
 		summarizeBy: none
 		sourceColumn: YearsAtCompany
 
 	column YearsInCurrentRole
 		dataType: int64
 		formatString: 0
+		lineageTag: 2d71fb1f-6f12-4d91-9b7c-ab28d8740b06
 		summarizeBy: none
 		sourceColumn: YearsInCurrentRole
 
 	column YearsSinceLastPromotion
 		dataType: int64
 		formatString: 0
+		lineageTag: e5eaf0dc-a216-43f6-a3c8-a91d81bd3990
 		summarizeBy: none
 		sourceColumn: YearsSinceLastPromotion
 
 	column YearsWithCurrManager
 		dataType: int64
 		formatString: 0
+		lineageTag: 884098e4-8b74-419d-bf74-dd9e0e150007
 		summarizeBy: none
 		sourceColumn: YearsWithCurrManager
 
 	column 'Age Band'
 		dataType: string
+		lineageTag: 6a66db29-8db1-493e-a41b-ac56c0496b3c
 		summarizeBy: none
 		sourceColumn: Age Band
 		sortByColumn: 'Age Band Order'
 
 	column 'Age Band Order'
 		dataType: int64
-		formatString: 0
 		isHidden
+		formatString: 0
+		lineageTag: a8d68891-edc1-40f2-b206-2c964a06fb26
 		summarizeBy: none
 		sourceColumn: Age Band Order
 
 	column 'Tenure Band'
 		dataType: string
+		lineageTag: 636114e8-9ee4-4046-8722-e61b9d5f8781
 		summarizeBy: none
 		sourceColumn: Tenure Band
 		sortByColumn: 'Tenure Band Order'
 
 	column 'Tenure Band Order'
 		dataType: int64
-		formatString: 0
 		isHidden
+		formatString: 0
+		lineageTag: 2b9dcdf2-d2fc-4b9b-8bcf-0d5636c2537e
 		summarizeBy: none
 		sourceColumn: Tenure Band Order
 
 	column 'Income Band'
 		dataType: string
+		lineageTag: 8fd6b1b0-ee47-4111-b7b1-b03930411c8d
 		summarizeBy: none
 		sourceColumn: Income Band
 		sortByColumn: 'Income Band Order'
 
 	column 'Income Band Order'
 		dataType: int64
-		formatString: 0
 		isHidden
+		formatString: 0
+		lineageTag: 178e73db-edf9-4ce5-bc82-5ce751392969
 		summarizeBy: none
 		sourceColumn: Income Band Order
+
+	column 'Overtime Status'
+		dataType: string
+		lineageTag: 523ca2ce-2d3d-41f7-b596-abe44b0eddc5
+		summarizeBy: none
+		sourceColumn: Overtime Status
+		sortByColumn: 'Overtime Order'
+
+	column 'Overtime Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2e10b3b5-e0c1-4a31-9d2d-d393facc32b6
+		summarizeBy: none
+		sourceColumn: Overtime Order
+
+	column 'Dot X'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5d251e28-94f3-48d7-a993-faf96c15a6db
+		summarizeBy: none
+		sourceColumn: Dot X
+
+	column 'Dot Y'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 342d2be8-89aa-486b-99d3-ce13bb723dc1
+		summarizeBy: none
+		sourceColumn: Dot Y
+
+	column 'Dot Label Y'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fef63ce6-b9e1-4a92-8909-fba8a0a1d743
+		summarizeBy: none
+		sourceColumn: Dot Label Y
 
 	partition Employees = m
 		mode: import
 		source =
-			let
-			    Source = Csv.Document(File.Contents(DataFolder & "HR.csv"), [Delimiter = ",", Columns = 35, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
-			    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
-			    // EmployeeCount, Over18 and StandardHours hold one value for every row; the three *Rate columns are undocumented
-			    Dropped = Table.RemoveColumns(Promoted, {"EmployeeCount", "Over18", "StandardHours", "DailyRate", "HourlyRate", "MonthlyRate"}),
-			    TextCols = {"Attrition", "BusinessTravel", "Department", "EducationField", "Gender", "JobRole", "MaritalStatus", "OverTime"},
-			    Typed = Table.TransformColumnTypes(Dropped,
-			        List.Transform(Table.ColumnNames(Dropped), each {_, if List.Contains(TextCols, _) then type text else Int64.Type})),
-			    CleanTravel = Table.ReplaceValue(Typed, "_", " ", Replacer.ReplaceText, {"BusinessTravel"}),
-			    Flag = Table.AddColumn(CleanTravel, "Attrition Flag", each if [Attrition] = "Yes" then 1 else 0, Int64.Type),
-			    // Code-to-label lookups from the IBM data dictionary
-			    EduLabel = Table.AddColumn(Flag, "Education Level", each {"Below College", "College", "Bachelor", "Master", "Doctor"}{[Education] - 1}, type text),
-			    EnvLabel = Table.AddColumn(EduLabel, "Environment Satisfaction", each {"Low", "Medium", "High", "Very High"}{[EnvironmentSatisfaction] - 1}, type text),
-			    JobSatLabel = Table.AddColumn(EnvLabel, "Job Satisfaction", each {"Low", "Medium", "High", "Very High"}{[JobSatisfaction] - 1}, type text),
-			    WlbLabel = Table.AddColumn(JobSatLabel, "Work-Life Balance", each {"Bad", "Good", "Better", "Best"}{[WorkLifeBalance] - 1}, type text),
-			    LevelLabel = Table.AddColumn(WlbLabel, "Job Level", each "Level " & Text.From([JobLevel]), type text),
-			    StockLabel = Table.AddColumn(LevelLabel, "Stock Options", each "Level " & Text.From([StockOptionLevel]), type text),
-			    // Bands: each label gets an order column so visuals sort 18-25, 26-35 ... instead of alphabetically
-			    AgeOrder = Table.AddColumn(StockLabel, "Age Band Order", each if [Age] <= 25 then 1 else if [Age] <= 35 then 2 else if [Age] <= 45 then 3 else if [Age] <= 55 then 4 else 5, Int64.Type),
-			    AgeBand = Table.AddColumn(AgeOrder, "Age Band", each {"18-25", "26-35", "36-45", "46-55", "56+"}{[Age Band Order] - 1}, type text),
-			    TenureOrder = Table.AddColumn(AgeBand, "Tenure Band Order", each if [YearsAtCompany] <= 2 then 1 else if [YearsAtCompany] <= 5 then 2 else if [YearsAtCompany] <= 10 then 3 else 4, Int64.Type),
-			    TenureBand = Table.AddColumn(TenureOrder, "Tenure Band", each {"0-2 yrs", "3-5 yrs", "6-10 yrs", "10+ yrs"}{[Tenure Band Order] - 1}, type text),
-			    IncomeOrder = Table.AddColumn(TenureBand, "Income Band Order", each if [MonthlyIncome] < 3000 then 1 else if [MonthlyIncome] < 5000 then 2 else if [MonthlyIncome] < 10000 then 3 else 4, Int64.Type),
-			    IncomeBand = Table.AddColumn(IncomeOrder, "Income Band", each {"Under 3K", "3K-5K", "5K-10K", "10K+"}{[Income Band Order] - 1}, type text)
-			in
-			    IncomeBand
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "HR.csv"), [Delimiter = ",", Columns = 35, Encoding = 65001, QuoteStyle = QuoteStyle.None]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    // EmployeeCount, Over18 and StandardHours hold one value for every row; the three *Rate columns are undocumented
+				    Dropped = Table.RemoveColumns(Promoted, {"EmployeeCount", "Over18", "StandardHours", "DailyRate", "HourlyRate", "MonthlyRate"}),
+				    TextCols = {"Attrition", "BusinessTravel", "Department", "EducationField", "Gender", "JobRole", "MaritalStatus", "OverTime"},
+				    Typed = Table.TransformColumnTypes(Dropped,
+				        List.Transform(Table.ColumnNames(Dropped), each {_, if List.Contains(TextCols, _) then type text else Int64.Type})),
+				    CleanTravel = Table.ReplaceValue(Typed, "_", " ", Replacer.ReplaceText, {"BusinessTravel"}),
+				    Flag = Table.AddColumn(CleanTravel, "Attrition Flag", each if [Attrition] = "Yes" then 1 else 0, Int64.Type),
+				    // Code-to-label lookups from the IBM data dictionary
+				    EduLabel = Table.AddColumn(Flag, "Education Level", each {"Below College", "College", "Bachelor", "Master", "Doctor"}{[Education] - 1}, type text),
+				    EnvLabel = Table.AddColumn(EduLabel, "Environment Satisfaction", each {"Low", "Medium", "High", "Very High"}{[EnvironmentSatisfaction] - 1}, type text),
+				    JobSatLabel = Table.AddColumn(EnvLabel, "Job Satisfaction", each {"Low", "Medium", "High", "Very High"}{[JobSatisfaction] - 1}, type text),
+				    WlbLabel = Table.AddColumn(JobSatLabel, "Work-Life Balance", each {"Bad", "Good", "Better", "Best"}{[WorkLifeBalance] - 1}, type text),
+				    LevelLabel = Table.AddColumn(WlbLabel, "Job Level", each "Level " & Text.From([JobLevel]), type text),
+				    StockLabel = Table.AddColumn(LevelLabel, "Stock Options", each "Level " & Text.From([StockOptionLevel]), type text),
+				    // Bands: each label gets an order column so visuals sort 18-25, 26-35 ... instead of alphabetically
+				    AgeOrder = Table.AddColumn(StockLabel, "Age Band Order", each if [Age] <= 25 then 1 else if [Age] <= 35 then 2 else if [Age] <= 45 then 3 else if [Age] <= 55 then 4 else 5, Int64.Type),
+				    AgeBand = Table.AddColumn(AgeOrder, "Age Band", each {"18-25", "26-35", "36-45", "46-55", "56+"}{[Age Band Order] - 1}, type text),
+				    TenureOrder = Table.AddColumn(AgeBand, "Tenure Band Order", each if [YearsAtCompany] <= 2 then 1 else if [YearsAtCompany] <= 5 then 2 else if [YearsAtCompany] <= 10 then 3 else 4, Int64.Type),
+				    TenureBand = Table.AddColumn(TenureOrder, "Tenure Band", each {"0-2 yrs", "3-5 yrs", "6-10 yrs", "10+ yrs"}{[Tenure Band Order] - 1}, type text),
+				    IncomeOrder = Table.AddColumn(TenureBand, "Income Band Order", each if [MonthlyIncome] < 3000 then 1 else if [MonthlyIncome] < 5000 then 2 else if [MonthlyIncome] < 10000 then 3 else 4, Int64.Type),
+				    IncomeBand = Table.AddColumn(IncomeOrder, "Income Band", each {"Under 3K", "3K-5K", "5K-10K", "10K+"}{[Income Band Order] - 1}, type text),
+				    OtOrder = Table.AddColumn(IncomeBand, "Overtime Order", each if [OverTime] = "Yes" then 2 else 1, Int64.Type),
+				    OtStatus = Table.AddColumn(OtOrder, "Overtime Status", each if [OverTime] = "Yes" then "Overtime" else "No overtime", type text),
+				    // Dot grid: each department is a block of 49-dot rows, leavers first; 22px label band above, 12px gap below
+				    Depts = List.Sort(List.Distinct(OtStatus[Department])),
+				    DeptRows = List.Transform(Depts, (d) => Number.RoundUp(Table.RowCount(Table.SelectRows(OtStatus, each [Department] = d)) / 49)),
+				    Tops = List.Accumulate(List.Positions(Depts), {}, (acc, i) => acc & {if i = 0 then 0 else List.Last(acc) + 22 + DeptRows{i - 1} * 10 + 12}),
+				    Grouped = Table.Group(OtStatus, {"Department"}, {{"G", each Table.AddIndexColumn(
+				        Table.Sort(_, {{"Attrition Flag", Order.Descending}, {"EmployeeNumber", Order.Ascending}}), "Dot Index", 0, 1, Int64.Type)}}),
+				    Combined = Table.Combine(Grouped[G]),
+				    LabelY = Table.AddColumn(Combined, "Dot Label Y", each Tops{List.PositionOf(Depts, [Department])} + 14, Int64.Type),
+				    DotX = Table.AddColumn(LabelY, "Dot X", each 5 + Number.Mod([Dot Index], 49) * 10, Int64.Type),
+				    DotY = Table.AddColumn(DotX, "Dot Y", each [Dot Label Y] + 13 + Number.IntegerDivide([Dot Index], 49) * 10, Int64.Type),
+				    Final = Table.RemoveColumns(DotY, {"Dot Index"})
+				in
+				    Final
+

@@ -41,6 +41,29 @@ All pages share synced slicers (department, gender, job level, age band) and but
 | ![Attrition drivers](docs/drivers.png) | ![Compensation and what-if](docs/compensation.png) |
 |---|---|
 
+## Story report (second Power BI report)
+
+`HR-Attrition-Story.pbip` is a second report on the same semantic model. It brings the web version's design into Power BI and stays inside Power BI's limits: native visuals only, no custom visuals.
+
+![Story report: every dot is one employee](docs/story-who.png)
+
+| Page | Hero | What else is on it |
+|------|------|--------------------|
+| **Who leaves** | 1,470 dots, one per employee, drawn by a DAX measure as an SVG image. Dots in the current filter light up (raspberry = left, grey = stayed), and clicking any bar lights up that group | Attrition by role, age and tenure |
+| **Why they leave** | Job level x overtime heat matrix on a single-hue ramp | Overtime figures; four driver charts behind a segmented metric switch |
+| **What it costs** | A sentence written by DAX that changes as you drag the raise and replacement-cost sliders | Break-even by job level, gender pay by role, pay vs attrition |
+
+How the design rules were carried over:
+- **Titles state the finding.** Every chart title is a DAX measure, for example "Highest attrition: Sales Representative, 39.8%", so the title changes with the filters.
+- **Colour is data.** A measure colours the highest bar raspberry and the rest a light tint. The matrix uses the same sequential ramp, with white text on the darker cells.
+- **No card chrome.** Visuals sit straight on the page: no borders, no shadows, no gridlines.
+- **Every control has states.** Tabs (page navigator), the metric switch (button slicer) and Reset filters each have rest, hover, press and selected styles.
+- **Rich hover.** Role bars and bubbles open a custom tooltip page.
+- **Empty states guide the reader.** With no matching rows, the headline reads "No one matches these filters" and tells the reader how to reset.
+
+| ![Why they leave](docs/story-why.png) | ![What it costs](docs/story-cost.png) |
+|---|---|
+
 ## Web version
 
 The same analysis as a website, so anyone can explore it from a link: [ananya3283.github.io/HR-Analytics-Dashboard](https://ananya3283.github.io/HR-Analytics-Dashboard/).
@@ -96,6 +119,7 @@ Run it locally: `cd web && npm install && npm run dev`.
 data/HR.csv                     IBM HR attrition dataset
 sql/hr_analysis.sql             SQL analysis (16 queries)
 HR-Analytics.pbip               Power BI project (open this)
+HR-Attrition-Story.pbip         second report on the same model (story design)
 HR-Analytics.SemanticModel/     model: Power Query, tables, DAX measures (TMDL, readable in any editor)
 HR-Analytics.Report/            report pages and visuals (PBIR JSON)
 web/                            web version (React + TypeScript), deployed to GitHub Pages

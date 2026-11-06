@@ -1,0 +1,105 @@
+{
+  "name": "HR Paper",
+  "dataColors": [
+    "#C8325B",
+    "#00829B",
+    "#9AA8B3",
+    "#3D63C9",
+    "#B26B00",
+    "#46535D",
+    "#7A5CC2",
+    "#D9A21B"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#172026",
+  "tableAccent": "#C8325B",
+  "good": "#2E9E6A",
+  "neutral": "#D9A21B",
+  "bad": "#C8325B",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#172026"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 9,
+      "color": "#46535D"
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 26,
+      "color": "#172026"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 11,
+      "color": "#172026"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": false
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ],
+        "visualTooltip": [
+          {
+            "background": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "titleFontColor": {
+              "solid": {
+                "color": "#5D6B75"
+              }
+            },
+            "valueFontColor": {
+              "solid": {
+                "color": "#172026"
+              }
+            },
+            "fontFamily": "Segoe UI"
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F7F7F4"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F7F7F4"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

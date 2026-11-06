@@ -1,53 +1,65 @@
 table _Measures
+	lineageTag: e9550808-1819-4406-84aa-a06ae0e04929
 
 	/// Headcount in the current filter context (leavers included).
 	measure Employees = COUNTROWS ( Employees )
 		formatString: #,0
 		displayFolder: 1 KPIs
+		lineageTag: 9c02d9ac-5fdb-48e3-896f-d04250d50316
 
 	/// Employees who left.
 	measure Leavers = CALCULATE ( COUNTROWS ( Employees ), Employees[Attrition] = "Yes" )
 		formatString: #,0
 		displayFolder: 1 KPIs
+		lineageTag: f23ab713-1edc-4c73-941f-376d0e468cf2
 
 	/// Employees still at the company.
 	measure 'Active Employees' = CALCULATE ( COUNTROWS ( Employees ), Employees[Attrition] = "No" )
 		formatString: #,0
 		displayFolder: 1 KPIs
+		lineageTag: 0a8c5dd5-dd0a-401b-b4f9-8d742a22d685
 
 	/// Leavers divided by headcount.
 	measure 'Attrition Rate' = DIVIDE ( [Leavers], [Employees] )
 		formatString: 0.0%
 		displayFolder: 1 KPIs
+		lineageTag: a89a3a70-582f-424c-b4ee-bc9a9f4532ad
 
 	measure 'Avg Monthly Income' = AVERAGE ( Employees[MonthlyIncome] )
 		formatString: #,0
 		displayFolder: 1 KPIs
+		lineageTag: e2e1ebd7-8a3d-49c1-85d5-e2603a811333
 
 	measure 'Avg Age' = AVERAGE ( Employees[Age] )
 		formatString: 0.0
 		displayFolder: 1 KPIs
+		lineageTag: c1ec66cd-4449-445e-9cde-da804f22bf46
 
 	measure 'Avg Tenure (Years)' = AVERAGE ( Employees[YearsAtCompany] )
 		formatString: 0.0
 		displayFolder: 1 KPIs
+		lineageTag: 474e93e6-5761-44ed-8314-493c94839c03
 
 	measure 'Attrition Rate (Overtime)' = CALCULATE ( [Attrition Rate], Employees[OverTime] = "Yes" )
 		formatString: 0.0%
 		displayFolder: 2 Drivers
+		lineageTag: 56436550-0730-4a20-9e4b-f535b273e536
 
 	measure 'Attrition Rate (No Overtime)' = CALCULATE ( [Attrition Rate], Employees[OverTime] = "No" )
 		formatString: 0.0%
 		displayFolder: 2 Drivers
+		lineageTag: 082f150f-5494-4ee2-a2cd-4833ca57070e
 
 	/// How many times more often overtime staff leave than staff without overtime.
 	measure 'Overtime Risk Multiple' = DIVIDE ( [Attrition Rate (Overtime)], [Attrition Rate (No Overtime)] )
 		formatString: 0.0"x"
 		displayFolder: 2 Drivers
+		lineageTag: 679c1c61-dafd-444d-81f8-35d5fccc0afe
 
 	measure 'Attrition Rate (First 2 Years)' = CALCULATE ( [Attrition Rate], Employees[YearsAtCompany] <= 2 )
 		formatString: 0.0%
 		displayFolder: 2 Drivers
+		lineageTag: 45197acd-8dd4-41f3-994d-19f06cfa39ed
 
 	/// Driven by the Metric Selector slicer on the Attrition Drivers page.
 	measure 'Selected Metric' =
@@ -58,72 +70,86 @@ table _Measures
 			    [Attrition Rate]
 			)
 		displayFolder: 2 Drivers
+		lineageTag: d168388d-0a9e-4943-ae3d-511e427d43eb
 
 		formatStringDefinition =
-			SWITCH (
-			    SELECTEDVALUE ( 'Metric Selector'[Metric], "Attrition Rate" ),
-			    "Attrition Rate", "0.0%",
-			    "#,0"
-			)
+				SWITCH (
+				    SELECTEDVALUE ( 'Metric Selector'[Metric], "Attrition Rate" ),
+				    "Attrition Rate", "0.0%",
+				    "#,0"
+				)
 
 	measure 'Monthly Payroll' = SUM ( Employees[MonthlyIncome] )
 		formatString: #,0
 		displayFolder: 3 Compensation
+		lineageTag: 7bc790b9-ed73-4b90-9b32-0eed255aa66c
 
 	measure 'Annual Payroll' = [Monthly Payroll] * 12
 		formatString: #,0
 		displayFolder: 3 Compensation
+		lineageTag: 4a777718-66cd-4333-a700-d22951cc327a
 
 	measure 'Avg Income (Male)' = CALCULATE ( [Avg Monthly Income], Employees[Gender] = "Male" )
 		formatString: #,0
 		displayFolder: 3 Compensation
+		lineageTag: 9e278ed9-0e8b-49b2-9437-30bcd7bf720e
 
 	measure 'Avg Income (Female)' = CALCULATE ( [Avg Monthly Income], Employees[Gender] = "Female" )
 		formatString: #,0
 		displayFolder: 3 Compensation
+		lineageTag: 26471716-b432-4048-8235-e0216bd22fd2
 
 	/// Positive = men paid more on average, negative = women paid more.
 	measure 'Gender Pay Gap %' = DIVIDE ( [Avg Income (Male)] - [Avg Income (Female)], [Avg Income (Male)] )
 		formatString: 0.0%
 		displayFolder: 3 Compensation
+		lineageTag: d8c56674-c439-48ff-8f53-41f07c781c9d
 
 	/// Raise from the slicer; 10% when nothing or several values are selected.
 	measure 'Raise % Value' = SELECTEDVALUE ( 'Raise %'[Raise %], 0.10 )
 		formatString: 0.0%
 		displayFolder: 4 What-if
+		lineageTag: 4ef39380-705c-4ce5-b653-651e1a0fdc1a
 
 	/// Cost to replace a leaver as a share of their annual salary (assumption, default 50%).
 	measure 'Replacement Cost % Value' = SELECTEDVALUE ( 'Replacement Cost %'[Replacement Cost %], 0.50 )
 		formatString: 0%
 		displayFolder: 4 What-if
+		lineageTag: 0d853afe-9468-4d95-a4f4-d7aa6b2257e3
 
 	/// Annual salary of every leaver times the replacement-cost assumption.
 	measure 'Attrition Cost (Est.)' = CALCULATE ( SUM ( Employees[MonthlyIncome] ), Employees[Attrition] = "Yes" ) * 12 * [Replacement Cost % Value]
 		formatString: #,0
 		displayFolder: 4 What-if
+		lineageTag: 665ec96e-d001-48b2-9cbb-e668a06f6802
 
 	measure 'Cost per Leaver' = DIVIDE ( [Attrition Cost (Est.)], [Leavers] )
 		formatString: #,0
 		displayFolder: 4 What-if
+		lineageTag: ab91750f-97db-4b0f-abb1-41b96e1d2396
 
 	/// Yearly cost of giving the selected raise to every current employee in the filter context.
 	measure 'Raise Cost (Annual)' = CALCULATE ( SUM ( Employees[MonthlyIncome] ), Employees[Attrition] = "No" ) * 12 * [Raise % Value]
 		formatString: #,0
 		displayFolder: 4 What-if
+		lineageTag: a1ea31d1-e838-4cf1-a724-30ad92d349f7
 
 	measure 'Projected Annual Payroll' = [Annual Payroll] + [Raise Cost (Annual)]
 		formatString: #,0
 		displayFolder: 4 What-if
+		lineageTag: 13169d83-f8b9-448d-b838-a7d70a1f9546
 
 	/// Leavers the raise must prevent each year to pay for itself.
 	measure 'Break-even Leavers' = DIVIDE ( [Raise Cost (Annual)], [Cost per Leaver] )
 		formatString: #,0
 		displayFolder: 4 What-if
+		lineageTag: 2f67b7f6-ae78-4d55-810f-178b36a8ed86
 
 	/// Share of current leavers the raise must keep to pay for itself. Above 100% = it cannot pay back.
 	measure 'Break-even % of Leavers' = DIVIDE ( [Break-even Leavers], [Leavers] )
 		formatString: 0%
 		displayFolder: 4 What-if
+		lineageTag: 2bc84bc8-6d8e-4434-8c57-361a48e73dc3
 
 	/// Job role with the highest attrition rate among roles with 20+ employees.
 	measure 'Insight Top Role' =
@@ -140,6 +166,7 @@ table _Measures
 			        "Riskiest role: " & MAXX ( TopRole, Employees[JobRole] ) & " (" & FORMAT ( MAXX ( TopRole, [@Rate] ), "0.0%" ) & " leave)"
 			    )
 		displayFolder: 5 Insights
+		lineageTag: 43fadc94-685f-499c-8d47-657fff2d0063
 
 	measure 'Insight Overtime' =
 			IF (
@@ -149,6 +176,7 @@ table _Measures
 			        & FORMAT ( [Attrition Rate (Overtime)], "0%" ) & " vs " & FORMAT ( [Attrition Rate (No Overtime)], "0%" ) & ")"
 			)
 		displayFolder: 5 Insights
+		lineageTag: f3cf7482-40d5-46e9-b16e-30cf3500ed28
 
 	measure 'Insight New Joiners' =
 			VAR EarlyLeavers = CALCULATE ( [Leavers], Employees[YearsAtCompany] <= 2 )
@@ -160,6 +188,7 @@ table _Measures
 			        "No leavers in this selection"
 			    )
 		displayFolder: 5 Insights
+		lineageTag: 50ac1335-c623-4c7d-8847-3a8062bbe676
 
 	measure 'Insight Pay' =
 			VAR Low = CALCULATE ( [Attrition Rate], Employees[Income Band] = "Under 3K" )
@@ -171,6 +200,7 @@ table _Measures
 			        "Under-3K earners leave at " & FORMAT ( Low, "0%" ) & " vs " & FORMAT ( High, "0%" ) & " for 10K+"
 			    )
 		displayFolder: 5 Insights
+		lineageTag: adcc5e40-e535-4459-ad58-cdfcc5b7d22b
 
 	/// Plain-English payback of the selected raise.
 	measure 'Insight Raise' =
@@ -187,16 +217,406 @@ table _Measures
 			        )
 			)
 		displayFolder: 5 Insights
+		lineageTag: 3f6418d8-e50d-49ec-912b-a6c8ff702928
+
+	/// One dot per employee as an SVG image; used by the hero on the Who leaves page.
+	measure 'Dot Grid SVG' =
+			// Every employee is a dot, in one block per department. Inside each block: people in the current filter
+			// who left (raspberry), then those who stayed (grey), then everyone outside the filter (faded).
+			// Each grid row of a run is one dashed stroke ('0 10' + round caps = a row of dots), which keeps the
+			// image URL short enough for Power BI (one path per dot was cut off).
+			VAR _Depts =
+			    SELECTCOLUMNS (
+			        CALCULATETABLE ( SUMMARIZE ( Employees, Employees[Department], Employees[Dot Label Y] ), REMOVEFILTERS () ),
+			        "D", Employees[Department] & "", "LY", Employees[Dot Label Y] + 0
+			    )
+			VAR _Left =
+			    CONCATENATEX (
+			        _Depts,
+			        VAR _D = [D]
+			        VAR _Y0 = [LY] + 13
+			        VAR _A = CALCULATE ( [Leavers], KEEPFILTERS ( Employees[Department] = _D ) ) + 0
+			        VAR _B = CALCULATE ( [Active Employees], KEEPFILTERS ( Employees[Department] = _D ) ) + 0
+			        VAR _T = CALCULATE ( COUNTROWS ( Employees ), REMOVEFILTERS ( Employees ), Employees[Department] = _D ) + 0
+			
+			        VAR _S = 0
+			        VAR _E = _A
+			        RETURN
+			            IF (
+			                _E > _S,
+			                CONCATENATEX (
+			                    GENERATESERIES ( INT ( _S / 49 ), INT ( ( _E - 1 ) / 49 ) ),
+			                    VAR _R = [Value]
+			                    VAR _C1 = IF ( _R = INT ( _S / 49 ), MOD ( _S, 49 ), 0 )
+			                    VAR _C2 = IF ( _R = INT ( ( _E - 1 ) / 49 ), MOD ( _E - 1, 49 ), 48 )
+			                    RETURN "M" & ( 5 + _C1 * 10 ) & " " & ( _Y0 + _R * 10 ) & "h" & ( ( _C2 - _C1 ) * 10 + 0.01 ),
+			                    ""
+			                )
+			            ),
+			        ""
+			    )
+			VAR _Stay =
+			    CONCATENATEX (
+			        _Depts,
+			        VAR _D = [D]
+			        VAR _Y0 = [LY] + 13
+			        VAR _A = CALCULATE ( [Leavers], KEEPFILTERS ( Employees[Department] = _D ) ) + 0
+			        VAR _B = CALCULATE ( [Active Employees], KEEPFILTERS ( Employees[Department] = _D ) ) + 0
+			        VAR _T = CALCULATE ( COUNTROWS ( Employees ), REMOVEFILTERS ( Employees ), Employees[Department] = _D ) + 0
+			
+			        VAR _S = _A
+			        VAR _E = _A + _B
+			        RETURN
+			            IF (
+			                _E > _S,
+			                CONCATENATEX (
+			                    GENERATESERIES ( INT ( _S / 49 ), INT ( ( _E - 1 ) / 49 ) ),
+			                    VAR _R = [Value]
+			                    VAR _C1 = IF ( _R = INT ( _S / 49 ), MOD ( _S, 49 ), 0 )
+			                    VAR _C2 = IF ( _R = INT ( ( _E - 1 ) / 49 ), MOD ( _E - 1, 49 ), 48 )
+			                    RETURN "M" & ( 5 + _C1 * 10 ) & " " & ( _Y0 + _R * 10 ) & "h" & ( ( _C2 - _C1 ) * 10 + 0.01 ),
+			                    ""
+			                )
+			            ),
+			        ""
+			    )
+			VAR _Faded =
+			    CONCATENATEX (
+			        _Depts,
+			        VAR _D = [D]
+			        VAR _Y0 = [LY] + 13
+			        VAR _A = CALCULATE ( [Leavers], KEEPFILTERS ( Employees[Department] = _D ) ) + 0
+			        VAR _B = CALCULATE ( [Active Employees], KEEPFILTERS ( Employees[Department] = _D ) ) + 0
+			        VAR _T = CALCULATE ( COUNTROWS ( Employees ), REMOVEFILTERS ( Employees ), Employees[Department] = _D ) + 0
+			
+			        VAR _S = _A + _B
+			        VAR _E = _T
+			        RETURN
+			            IF (
+			                _E > _S,
+			                CONCATENATEX (
+			                    GENERATESERIES ( INT ( _S / 49 ), INT ( ( _E - 1 ) / 49 ) ),
+			                    VAR _R = [Value]
+			                    VAR _C1 = IF ( _R = INT ( _S / 49 ), MOD ( _S, 49 ), 0 )
+			                    VAR _C2 = IF ( _R = INT ( ( _E - 1 ) / 49 ), MOD ( _E - 1, 49 ), 48 )
+			                    RETURN "M" & ( 5 + _C1 * 10 ) & " " & ( _Y0 + _R * 10 ) & "h" & ( ( _C2 - _C1 ) * 10 + 0.01 ),
+			                    ""
+			                )
+			            ),
+			        ""
+			    )
+			VAR _Labels =
+			    CONCATENATEX (
+			        _Depts,
+			        VAR _D = [D]
+			        VAR _N = CALCULATE ( [Employees], KEEPFILTERS ( Employees[Department] = _D ) )
+			        VAR _L = CALCULATE ( [Leavers], KEEPFILTERS ( Employees[Department] = _D ) )
+			        RETURN
+			            "<text x='3' y='" & [LY] & "'>" & SUBSTITUTE ( _D, "&", "&amp;" )
+			                & "<tspan fill='rgb(93,107,117)' dx='8'>"
+			                & IF ( _N = 0, "not in this selection",
+			                    FORMAT ( _L, "#,0" ) & " of " & FORMAT ( _N, "#,0" ) & " left (" & FORMAT ( DIVIDE ( _L, _N ), "0.0%" ) & ")" )
+			                & "</tspan></text>",
+			        ""
+			    )
+			VAR _Path = "<path fill='none' stroke-linecap='round' stroke-width='7' stroke-dasharray='0 10' "
+			RETURN
+			    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 490 410'>"
+			        & "<g font-family='Segoe UI' font-size='11' font-weight='600' fill='rgb(23,32,38)'>" & _Labels & "</g>"
+			        & _Path & "stroke='rgb(220,222,216)' d='" & _Faded & "'/>"
+			        & _Path & "stroke='rgb(154,168,179)' d='" & _Stay & "'/>"
+			        & _Path & "stroke='rgb(200,50,91)' d='" & _Left & "'/>"
+			        & "</svg>"
+		displayFolder: 6 Story
+		lineageTag: 739e505f-79da-4cac-829f-33ca04dc73a8
+		dataCategory: ImageUrl
+
+	measure 'Headline People' =
+			IF (
+			    [Employees] = 0,
+			    "No one matches these filters",
+			    FORMAT ( [Leavers], "#,0" ) & " of " & FORMAT ( [Employees], "#,0" ) & " people left"
+			)
+		displayFolder: 6 Story
+		lineageTag: b1d0c88d-c2a9-4b12-8d15-3ba1ca4a10fd
+
+	measure 'Headline Note' =
+			IF (
+			    [Employees] = 0,
+			    "Reset the filters to see everyone again.",
+			    FORMAT ( [Attrition Rate], "0.0%" ) & " attrition. Each dot is one person; click any bar to light up that group."
+			)
+		displayFolder: 6 Story
+		lineageTag: 333f80ee-a9db-4ece-ac38-8adb1d0a7007
+
+	measure 'Title Role' =
+			VAR T =
+			    FILTER (
+			        ADDCOLUMNS ( VALUES ( Employees[JobRole] ), "@R", [Attrition Rate], "@N", [Employees] ),
+			        [@N] >= 20
+			    )
+			VAR Top1 = TOPN ( 1, T, [@R], DESC )
+			VAR Grp = MAXX ( Top1, Employees[JobRole] )
+			RETURN
+			    IF (
+			        ISEMPTY ( T ),
+			        "Too few people in this selection to compare",
+			        "Highest attrition: " & Grp & ", " & FORMAT ( MAXX ( Top1, [@R] ), "0.0%" )
+			    )
+		displayFolder: 6 Story
+		lineageTag: a9841d34-df31-476e-88b3-0ef45f425478
+
+	measure 'Title Age' =
+			VAR T =
+			    FILTER (
+			        ADDCOLUMNS ( VALUES ( Employees[Age Band] ), "@R", [Attrition Rate], "@N", [Employees] ),
+			        [@N] >= 20
+			    )
+			VAR Top1 = TOPN ( 1, T, [@R], DESC )
+			VAR Grp = MAXX ( Top1, Employees[Age Band] )
+			RETURN
+			    IF (
+			        ISEMPTY ( T ),
+			        "Too few people in this selection to compare",
+			        "Highest attrition: ages " & Grp & ", " & FORMAT ( MAXX ( Top1, [@R] ), "0.0%" )
+			    )
+		displayFolder: 6 Story
+		lineageTag: 9a04e6d7-f294-4cc8-beb6-088ac3c55e3d
+
+	measure 'Title Tenure' =
+			VAR T =
+			    FILTER (
+			        ADDCOLUMNS ( VALUES ( Employees[Tenure Band] ), "@R", [Attrition Rate], "@N", [Employees] ),
+			        [@N] >= 20
+			    )
+			VAR Top1 = TOPN ( 1, T, [@R], DESC )
+			VAR Grp = MAXX ( Top1, Employees[Tenure Band] )
+			RETURN
+			    IF (
+			        ISEMPTY ( T ),
+			        "Too few people in this selection to compare",
+			        "Highest attrition: " & Grp & " at the company" & ", " & FORMAT ( MAXX ( Top1, [@R] ), "0.0%" )
+			    )
+		displayFolder: 6 Story
+		lineageTag: 3f918955-8d16-493a-b533-71488ec99948
+
+	measure 'Title Job Satisfaction' =
+			VAR T =
+			    FILTER (
+			        ADDCOLUMNS ( VALUES ( Employees[Job Satisfaction] ), "@R", [Attrition Rate], "@N", [Employees] ),
+			        [@N] >= 20
+			    )
+			VAR Top1 = TOPN ( 1, T, [@R], DESC )
+			VAR Grp = MAXX ( Top1, Employees[Job Satisfaction] )
+			RETURN
+			    IF (
+			        ISEMPTY ( T ),
+			        "Too few people in this selection to compare",
+			        "Highest attrition: " & Grp & " job satisfaction" & ", " & FORMAT ( MAXX ( Top1, [@R] ), "0.0%" )
+			    )
+		displayFolder: 6 Story
+		lineageTag: 458bc3a5-00ab-4f2d-9c04-4e32433a6c20
+
+	measure 'Title Work-Life' =
+			VAR T =
+			    FILTER (
+			        ADDCOLUMNS ( VALUES ( Employees[Work-Life Balance] ), "@R", [Attrition Rate], "@N", [Employees] ),
+			        [@N] >= 20
+			    )
+			VAR Top1 = TOPN ( 1, T, [@R], DESC )
+			VAR Grp = MAXX ( Top1, Employees[Work-Life Balance] )
+			RETURN
+			    IF (
+			        ISEMPTY ( T ),
+			        "Too few people in this selection to compare",
+			        "Highest attrition: " & Grp & " work-life balance" & ", " & FORMAT ( MAXX ( Top1, [@R] ), "0.0%" )
+			    )
+		displayFolder: 6 Story
+		lineageTag: 7593e86a-7067-4d0e-880f-bab4a4ec61f0
+
+	measure 'Title Travel' =
+			VAR T =
+			    FILTER (
+			        ADDCOLUMNS ( VALUES ( Employees[BusinessTravel] ), "@R", [Attrition Rate], "@N", [Employees] ),
+			        [@N] >= 20
+			    )
+			VAR Top1 = TOPN ( 1, T, [@R], DESC )
+			VAR Grp = MAXX ( Top1, Employees[BusinessTravel] )
+			RETURN
+			    IF (
+			        ISEMPTY ( T ),
+			        "Too few people in this selection to compare",
+			        "Highest attrition: " & LOWER ( Grp ) & ", " & FORMAT ( MAXX ( Top1, [@R] ), "0.0%" )
+			    )
+		displayFolder: 6 Story
+		lineageTag: c6e30d70-e841-4948-a25c-ca230ecc61df
+
+	measure 'Title Stock' =
+			VAR T =
+			    FILTER (
+			        ADDCOLUMNS ( VALUES ( Employees[Stock Options] ), "@R", [Attrition Rate], "@N", [Employees] ),
+			        [@N] >= 20
+			    )
+			VAR Top1 = TOPN ( 1, T, [@R], DESC )
+			VAR Grp = MAXX ( Top1, Employees[Stock Options] )
+			RETURN
+			    IF (
+			        ISEMPTY ( T ),
+			        "Too few people in this selection to compare",
+			        "Highest attrition: stock options " & LOWER ( Grp ) & ", " & FORMAT ( MAXX ( Top1, [@R] ), "0.0%" )
+			    )
+		displayFolder: 6 Story
+		lineageTag: 5dccf1d3-54e1-416e-8fa6-0f0de694c2ae
+
+	measure 'Title Matrix' =
+			VAR T =
+			    FILTER (
+			        ADDCOLUMNS (
+			            SUMMARIZE ( Employees, Employees[Job Level], Employees[Overtime Status] ),
+			            "@R", [Attrition Rate], "@N", [Employees]
+			        ),
+			        [@N] >= 20
+			    )
+			VAR Top1 = TOPN ( 1, T, [@R], DESC )
+			RETURN
+			    IF (
+			        ISEMPTY ( T ),
+			        "Too few people in this selection to compare",
+			        "Highest attrition: " & MAXX ( Top1, Employees[Job Level] ) & ", " & LOWER ( MAXX ( Top1, Employees[Overtime Status] ) )
+			            & ", " & FORMAT ( MAXX ( Top1, [@R] ), "0.0%" ) & " leave"
+			    )
+		displayFolder: 6 Story
+		lineageTag: b17ff0ed-e4b6-4776-999f-eb21e75f4583
+
+	measure 'Subtitle Metric' = "Bars show " & LOWER ( SELECTEDVALUE ( 'Metric Selector'[Metric], "Attrition Rate" ) )
+		displayFolder: 6 Story
+		lineageTag: bb399136-535c-400d-b143-b075ab2dca60
+
+	measure 'Title Gender Pay' =
+			VAR Gap = [Gender Pay Gap %]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( [Avg Income (Male)] ) || ISBLANK ( [Avg Income (Female)] ), "Average monthly income by role",
+			        Gap < 0, "Women earn " & FORMAT ( -Gap, "0.0%" ) & " more than men on average",
+			        "Men earn " & FORMAT ( Gap, "0.0%" ) & " more than women on average"
+			    )
+		displayFolder: 6 Story
+		lineageTag: 6f5b0c9b-9417-4f7d-88d6-21edaae2fb23
+
+	measure 'Title Break-even' =
+			VAR _Lv =
+			    ADDCOLUMNS ( VALUES ( Employees[Job Level] ), "@BE", [Break-even Leavers], "@L", [Leavers] )
+			VAR Pays = COUNTROWS ( FILTER ( _Lv, [@L] > 0 && [@BE] <= [@L] ) )
+			RETURN
+			    "At a " & FORMAT ( [Raise % Value], "0.0%" ) & " raise, " & FORMAT ( Pays + 0, "0" ) & " of "
+			        & COUNTROWS ( _Lv ) & " job levels can break even"
+		displayFolder: 6 Story
+		lineageTag: 55cfc787-194d-4e67-b135-c6cfc6d74266
+
+	/// Plain-English payback of the selected raise, for the What it costs page.
+	measure 'Hero Raise' =
+			VAR R = [Raise % Value]
+			VAR BE = [Break-even Leavers]
+			VAR L = [Leavers]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        R = 0, "Move the raise slider to see what keeping people would cost.",
+			        L = 0, "No one left in this selection, so a raise has nothing to pay back.",
+			        "A " & FORMAT ( R, "0.0%" ) & " raise for the " & FORMAT ( [Active Employees], "#,0" ) & " people who stayed costs "
+			            & FORMAT ( [Raise Cost (Annual)] / 1e6, "0.0" ) & "M a year. "
+			            & IF (
+			                BE > L,
+			                "To pay for itself it would have to stop " & FORMAT ( BE, "#,0" ) & " departures, but only "
+			                    & FORMAT ( L, "#,0" ) & " people left.",
+			                "It pays for itself if it stops " & FORMAT ( BE, "#,0" ) & " of the " & FORMAT ( L, "#,0" )
+			                    & " departures (" & FORMAT ( DIVIDE ( BE, L ), "0%" ) & ")."
+			            )
+			    )
+		displayFolder: 6 Story
+		lineageTag: 49f42f5f-23c2-4fc3-8692-3315be840296
+
+	/// Raspberry for the highest bar, tint for the rest.
+	measure 'Color Rate Bar' =
+			VAR V = [Attrition Rate]
+			VAR Mx =
+			    SWITCH (
+			        TRUE (),
+			    ISINSCOPE ( Employees[JobRole] ), MAXX ( ALLSELECTED ( Employees[JobRole] ), [Attrition Rate] ),
+			    ISINSCOPE ( Employees[Age Band] ), MAXX ( ALLSELECTED ( Employees[Age Band], Employees[Age Band Order] ), [Attrition Rate] ),
+			    ISINSCOPE ( Employees[Tenure Band] ), MAXX ( ALLSELECTED ( Employees[Tenure Band], Employees[Tenure Band Order] ), [Attrition Rate] ),
+			    ISINSCOPE ( Employees[Job Satisfaction] ), MAXX ( ALLSELECTED ( Employees[Job Satisfaction], Employees[JobSatisfaction] ), [Attrition Rate] ),
+			    ISINSCOPE ( Employees[Work-Life Balance] ), MAXX ( ALLSELECTED ( Employees[Work-Life Balance], Employees[WorkLifeBalance] ), [Attrition Rate] ),
+			    ISINSCOPE ( Employees[BusinessTravel] ), MAXX ( ALLSELECTED ( Employees[BusinessTravel] ), [Attrition Rate] ),
+			    ISINSCOPE ( Employees[Stock Options] ), MAXX ( ALLSELECTED ( Employees[Stock Options], Employees[StockOptionLevel] ), [Attrition Rate] ),
+			    ISINSCOPE ( Employees[Income Band] ), MAXX ( ALLSELECTED ( Employees[Income Band], Employees[Income Band Order] ), [Attrition Rate] ),
+			    ISINSCOPE ( Employees[Department] ), MAXX ( ALLSELECTED ( Employees[Department] ), [Attrition Rate] ),
+			    ISINSCOPE ( Employees[Overtime Status] ), MAXX ( ALLSELECTED ( Employees[Overtime Status], Employees[Overtime Order] ), [Attrition Rate] ),
+			    ISINSCOPE ( Employees[Job Level] ), MAXX ( ALLSELECTED ( Employees[Job Level], Employees[JobLevel] ), [Attrition Rate] )
+			    )
+			RETURN IF ( NOT ISBLANK ( V ) && V >= Mx, "#C8325B", "#E39AAE" )
+		displayFolder: 6 Story
+		lineageTag: 60544cd3-6c78-490b-bc4b-3a7ef1ffe482
+
+	/// Same rule for the metric-switch charts.
+	measure 'Color Metric Bar' =
+			VAR V = [Selected Metric]
+			VAR Mx =
+			    SWITCH (
+			        TRUE (),
+			    ISINSCOPE ( Employees[JobRole] ), MAXX ( ALLSELECTED ( Employees[JobRole] ), [Selected Metric] ),
+			    ISINSCOPE ( Employees[Age Band] ), MAXX ( ALLSELECTED ( Employees[Age Band], Employees[Age Band Order] ), [Selected Metric] ),
+			    ISINSCOPE ( Employees[Tenure Band] ), MAXX ( ALLSELECTED ( Employees[Tenure Band], Employees[Tenure Band Order] ), [Selected Metric] ),
+			    ISINSCOPE ( Employees[Job Satisfaction] ), MAXX ( ALLSELECTED ( Employees[Job Satisfaction], Employees[JobSatisfaction] ), [Selected Metric] ),
+			    ISINSCOPE ( Employees[Work-Life Balance] ), MAXX ( ALLSELECTED ( Employees[Work-Life Balance], Employees[WorkLifeBalance] ), [Selected Metric] ),
+			    ISINSCOPE ( Employees[BusinessTravel] ), MAXX ( ALLSELECTED ( Employees[BusinessTravel] ), [Selected Metric] ),
+			    ISINSCOPE ( Employees[Stock Options] ), MAXX ( ALLSELECTED ( Employees[Stock Options], Employees[StockOptionLevel] ), [Selected Metric] ),
+			    ISINSCOPE ( Employees[Income Band] ), MAXX ( ALLSELECTED ( Employees[Income Band], Employees[Income Band Order] ), [Selected Metric] ),
+			    ISINSCOPE ( Employees[Department] ), MAXX ( ALLSELECTED ( Employees[Department] ), [Selected Metric] ),
+			    ISINSCOPE ( Employees[Overtime Status] ), MAXX ( ALLSELECTED ( Employees[Overtime Status], Employees[Overtime Order] ), [Selected Metric] ),
+			    ISINSCOPE ( Employees[Job Level] ), MAXX ( ALLSELECTED ( Employees[Job Level], Employees[JobLevel] ), [Selected Metric] )
+			    )
+			RETURN IF ( NOT ISBLANK ( V ) && V >= Mx, "#C8325B", "#E39AAE" )
+		displayFolder: 6 Story
+		lineageTag: 7ac52046-68a4-4953-b9e2-1ac156a40fdb
+
+	/// Sequential raspberry ramp, light to dark, for the job level x overtime matrix.
+	measure 'Color Heat' =
+			VAR R = [Attrition Rate]
+			RETURN
+			    SWITCH ( TRUE (), ISBLANK ( R ), "#ECEDE8", R < 0.08, "#E39AAE", R < 0.15, "#D56B88", R < 0.25, "#C44166",
+			        R < 0.4, "#A12347", "#6E1431" )
+		displayFolder: 6 Story
+		lineageTag: b60d21d0-85e6-49e5-bf5d-9f3f2a378345
+
+	measure 'Color Heat Text' = IF ( [Attrition Rate] >= 0.15, "#FFFFFF", "#172026" )
+		displayFolder: 6 Story
+		lineageTag: 314c3045-01aa-41ba-a712-089c983b63f2
+
+	measure 'Tooltip Role' = SELECTEDVALUE ( Employees[JobRole], "Several roles" )
+		displayFolder: 6 Story
+		lineageTag: c69fb96a-c750-4cdb-82f0-7a31d79b7595
+
+	measure 'Tooltip Leavers' = FORMAT ( [Leavers], "#,0" ) & " of " & FORMAT ( [Employees], "#,0" ) & " left"
+		displayFolder: 6 Story
+		lineageTag: 5ed3142a-9694-46ed-bf10-303ab54be8fd
+
+	/// Share of people in the selection who work overtime.
+	measure 'Overtime Share' = DIVIDE ( CALCULATE ( [Employees], Employees[OverTime] = "Yes" ), [Employees] )
+		formatString: 0%
+		displayFolder: 6 Story
+		lineageTag: 697f9dcd-4c40-47db-9550-7c11fda94705
 
 	column Value
-		dataType: int64
-		formatString: 0
 		isHidden
-		isDataTypeInferred
-		isNameInferred
+		formatString: 0
+		lineageTag: d044f922-dfbd-4ad7-ae42-08b6441df7cd
 		summarizeBy: none
+		isNameInferred
 		sourceColumn: [Value]
 
 	partition _Measures = calculated
 		mode: import
 		source = ROW ( "Value", 0 )
+

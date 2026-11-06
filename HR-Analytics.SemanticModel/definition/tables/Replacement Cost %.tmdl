@@ -1,14 +1,14 @@
 table 'Replacement Cost %'
+	lineageTag: 36b5134f-237a-4c3d-8416-b6593eae180d
 
 	column 'Replacement Cost %'
-		dataType: double
 		formatString: 0%
-		isDataTypeInferred
-		isNameInferred
+		lineageTag: 6cb8da6f-708a-4db0-a3ce-beb7ae6a2d7a
 		summarizeBy: none
+		isNameInferred
 		sourceColumn: [Replacement Cost %]
 
 	partition 'Replacement Cost %' = calculated
 		mode: import
-		source =
-			DATATABLE ( "Replacement Cost %", DOUBLE, { { 0.25 }, { 0.50 }, { 0.75 }, { 1.00 }, { 1.50 } } )
+		source = SELECTCOLUMNS ( GENERATESERIES ( 0.25, 1.5, 0.05 ), "Replacement Cost %", ROUND ( [Value], 2 ) )
+

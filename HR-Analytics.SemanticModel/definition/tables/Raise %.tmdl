@@ -1,14 +1,14 @@
 table 'Raise %'
+	lineageTag: 6f803c42-1449-4af7-bf24-f89280ce63cd
 
 	column 'Raise %'
-		dataType: double
 		formatString: 0.0%
-		isDataTypeInferred
-		isNameInferred
+		lineageTag: 8014a5ae-38da-4a7d-a71e-c2da56f726ed
 		summarizeBy: none
+		isNameInferred
 		sourceColumn: [Raise %]
 
 	partition 'Raise %' = calculated
 		mode: import
-		source =
-			DATATABLE ( "Raise %", DOUBLE, { { 0 }, { 0.025 }, { 0.05 }, { 0.075 }, { 0.10 }, { 0.125 }, { 0.15 }, { 0.20 } } )
+		source = SELECTCOLUMNS ( GENERATESERIES ( 0, 0.2, 0.005 ), "Raise %", ROUND ( [Value], 3 ) )
+

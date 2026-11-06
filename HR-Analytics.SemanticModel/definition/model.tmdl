@@ -4,10 +4,15 @@ model Model
 	discourageImplicitMeasures
 	sourceQueryCulture: en-US
 
-	annotation PBI_QueryOrder = ["DataFolder","Employees"]
+annotation PBI_QueryOrder = ["DataFolder","Employees"]
+
+annotation PBI_ProTooling = ["DevMode"]
 
 ref table Employees
 ref table _Measures
 ref table 'Metric Selector'
 ref table 'Raise %'
 ref table 'Replacement Cost %'
+
+ref cultureInfo en-US
+
