@@ -64,6 +64,13 @@ How the design rules were carried over:
 | ![Why they leave](docs/story-why.png) | ![What it costs](docs/story-cost.png) |
 |---|---|
 
+**Rebuild from code.** `tools/` holds the Python scripts that generate both reports and the model as text:
+- `build_pbip.py` writes the model (Power Query, DAX measures) and the first report.
+- `story_measures.py` holds the story report's measures.
+- `build_story.py` writes the story report.
+
+Run `python tools/build_pbip.py .` and `python tools/build_story.py .` from the repo root with Power BI closed, then open the `.pbip` and refresh. The scripts rewrite the `definition` folders, so commit any edits made in Power BI first.
+
 ## Web version
 
 The same analysis as a website, so anyone can explore it from a link: [ananya3283.github.io/HR-Analytics-Dashboard](https://ananya3283.github.io/HR-Analytics-Dashboard/).
@@ -122,6 +129,7 @@ HR-Analytics.pbip               Power BI project (open this)
 HR-Attrition-Story.pbip         second report on the same model (story design)
 HR-Analytics.SemanticModel/     model: Power Query, tables, DAX measures (TMDL, readable in any editor)
 HR-Analytics.Report/            report pages and visuals (PBIR JSON)
+tools/                          Python generators for the model and both reports
 web/                            web version (React + TypeScript), deployed to GitHub Pages
 docs/                           screenshots
 ```

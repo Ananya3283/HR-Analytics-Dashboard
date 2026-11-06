@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "h_tab_track",
   "position": {
-    "x": 798,
+    "x": 720,
     "y": 16,
     "z": 1000,
     "height": 40,
-    "width": 458,
+    "width": 536,
     "tabOrder": 1000
   },
   "visual": {
